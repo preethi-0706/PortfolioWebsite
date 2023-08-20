@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resume Builder</title>
+  <style>
+     body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0066cc;
+      font-size: 32px;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 24px;
+      color: #0066cc;
+      margin-bottom: 10px;
+    }
+
+    .section {
+      background-color: #fff;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    input[type="file"] {
+      margin-top: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #0066cc;
+      color: #fff;
+    }
+
+    button[type="submit"] {
+      background-color: #0066cc;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0052b3;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    function toggleWorkExperienceFields() {
+       var workExperienceSection = document.getElementById("work-experience-section");
+      var yesRadio = document.getElementById("yes-radio");
+      if (yesRadio.checked) {
+        workExperienceSection.style.display = "block";
+      } else {
+        workExperienceSection.style.display = "none";
+      }
+    }
+
+    function validateForm() {
+      var inputs = document.querySelectorAll("input[required], textarea[required]");
+      var isValid = true;
+      for (var i = 0; i < inputs.length; i++) {
+        var input = inputs[i];
+        if (input.value.trim() === "") {
+          isValid = false;
+          var errorMessage = input.nextElementSibling;
+          errorMessage.innerHTML = "This field is required.";
+        } else {
+          input.nextElementSibling.innerHTML = "";
+        }
+      }
+      return isValid;
+    }
+
+    function generatePDF() {
+    if (validateForm()) {
+      const element = document.getElementById("resume");
+      const opt = {
+        margin:       10,
+        filename:     'resume.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).toPdf().save();
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <h1>Resume Builder</h1>
+
+  <form action="#" method="post" onsubmit="return validateForm()">
+
+    <div id="resume">
+
+      <div class="section">
+        <h2>Personal Details</h2>
+        <input type="text" name="name" placeholder="Name" required>
+      <span class="error-message"></span><br>
+      <input type="text" name="address" placeholder="Address" required>
+      <span class="error-message"></span><br>
+      <input type="text" name="pincode" placeholder="Pincode" required>
+      <span class="error-message"></span><br>
+      <input type="email" name="email" placeholder="Email" required>
+      <span class="error-message"></span><br>
+      <input type="tel" name="mobile_number" placeholder="Mobile Number" required>
+      <span class="error-message"></span><br>
+      </div>
+
+      <div class="section">
+        <h2>Photo</h2>
+      <input type="file" name="signature">
+      </div>
+
+      <div class="section">
+        <h2>Career Objectives</h2>
+        <textarea name="Career Objectives" style="width:100%; height: 200px;" required></textarea>
+      <span class="error-message"></span><br>
+      </div>
+
+      <div class="section">
+        <h2>Academic Qualification</h2>
+        <table>
+        <tr>
+          <th>Degree</th>
+          <th>Institute</th>
+          <th>Year of Completion</th>
+          <th>CGPA</th>
+        </tr>
+        <tr>
+          <td><input type="text" name="degree_1" required></td>
+          <td><input type="text" name="institute_1" required></td>
+          <td><input type="text" name="year_of_completion_1" required></td>
+          <td><input type="text" name="cgpa_1" required></td>
+        </tr>
+        <tr>
+          <td><input type="text" name="degree_2"></td>
+          <td><input type="text" name="institute_2"></td>
+          <td><input type="text" name="year_of_completion_2"></td>
+          <td><input type="text" name="cgpa_2"></td>
+        </tr>
+        <tr>
+          <td><input type="text" name="degree_3"></td>
+          <td><input type="text" name="institute_3"></td>
+          <td><input type="text" name="year_of_completion_3"></td>
+          <td><input type="text" name="cgpa_3"></td>
+        </tr>
+      </table>
+      </div>
+
+      <div class="section">
+        <h2>Technical Skills</h2>
+         <textarea name="technical-skills" style="width:100%; height: 200px;" required></textarea>
+      <span class="error-message"></span><br>
+      </div>
+
+      <div class="section">
+        <h2>Circular Activities</h2>
+        <textarea name="circular-activities" style="width:100%; height: 200px;" required></textarea>
+      <span class="error-message"></span><br>
+      </div>
+
+      <div class="section">
+        <h2>Strengths</h2>
+        <textarea name="strengths" style="width:100%; height: 200px;" required></textarea>
+      <span class="error-message"></span><br>
+      </div>
+
+      <div class="section">
+        <h2>Declaration</h2>
+       <textarea name="declaration" style="width:100%; height: 200px;" required></textarea>
+      <span class="error-message"></span><br>
+      </div>
+
+      <div class="section">
+        <h2>Signature</h2>
+         <input type="file" name="signature" required>
+      <span class="error-message"></span><br>
+      </div>
+
+      <div class="section">
+          <h2>Work Experience</h2>
+      <label>
+        <input type="radio" name="work_experience" value="yes" id="yes-radio" onclick="toggleWorkExperienceFields()">
+        Yes
+      </label>
+      <label>
+        <input type="radio" name="work_experience" value="no" checked onclick="toggleWorkExperienceFields()">
+        No
+      </label>
+
+      <div id="work-experience-section" style="display: none;">
+        <div class="experience-entry">
+          <input type="text" name="job_title_1" placeholder="Job Title">
+          <input type="text" name="company_name_1" placeholder="Company Name">
+          <input type="date" name="start_date_1" placeholder="Start Date">
+          <input type="date" name="end_date_1" placeholder="End Date">
+          <!-- Add more experience entries as needed -->
+        </div>
+      </div>
+      </div>
+
+      <div class="section">
+        <h2>References</h2>
+        <div class="reference-entry">
+        <input type="text" name="reference_name_1" placeholder="Name">
+        <input type="text" name="reference_designation_1" placeholder="Designation">
+        <input type="tel" name="reference_contact_1" placeholder="Contact Number">
+        <!-- Add more reference entries as needed -->
+      </div>
+      </div>
+
+      <div class="section">
+        <h2>Additional Information</h2>
+       <textarea name="additional_information" style="width:100%; height: 200px;"></textarea>
+    </div>
+
+    <div class="section">
+      <input type="text" name="city" placeholder="City" required>
+      <span class="error-message"></span><br>
+      <input type="text" name="state" placeholder="State" required>
+      <span class="error-message"></span><br>
+      <input type="date" name="date_of_birth" required>
+      <span class="error-message"></span><br>
+      </div>
+
+
+
+      <div class="section">
+        <input type="text" name="skills" placeholder="Key Skills" required>
+        <span class="error-message"></span><br>
+      </div>
+      
+    </div>
+    
+    <button type="button" onclick="generatePDF()">Submit</button>
+
+  </form>
+
+
+</body>
+</html>

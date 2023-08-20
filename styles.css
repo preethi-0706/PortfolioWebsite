@@ -1,0 +1,61 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #0066cc;
+  color: #fff;
+  padding: 10px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+}
+
+.menu a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.mobile-menu {
+  display: none;
+  cursor: pointer;
+}
+
+.burger-icon {
+  width: 30px;
+  height: 4px;
+  background-color: #fff;
+  margin: 6px 0;
+}
+
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.blog-post {
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.blog-post img {
+  max-width: 100%;
+  height: auto;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
